@@ -4,9 +4,19 @@
   "description": "Um gateway para pagamentos através de recursos HTTP.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index.js"
   },
-  "keywords": ["gateway", "pagamentos", "api"],
+  "keywords": [
+    "gateway",
+    "pagamentos",
+    "api"
+  ],
   "author": "Willian Pereira",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
 }
