@@ -8,8 +8,9 @@ payments.get('/payments', (req, res) => {
 
 payments.post('/payments/payment', (req, res) => {
     let payment = req.body;
-    console.log(JSON.stringify(payment));
-    res.send('ok');
+    payment.status = 'created';
+    payment.date = new Date();
+    res.send(payment);
 });
 
 module.exports = payments;
