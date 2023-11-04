@@ -30,12 +30,13 @@ payments.post('/payments/payment', [
     
     Payment.save(payment, (err, result) => {
         if(err) {
-            res.status(400);
+            res.status(500);
             console.log(`Error inserting into database: ${err}`);
-            return res.send(err);
+            return res.json(err);
         }
+
         console.log('Payment Created');
-        res.json(payment);
+        res.status(201).location(`/api/payments/payment/${result.insertId}`).json(payment);
     });
 });
 
