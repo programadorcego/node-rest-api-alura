@@ -12,6 +12,10 @@ class Payment {
     find(id, callback) {
         this._db.query(`SELECT * FROM payments WHERE id = ?`, [id], callback);
     }
+
+    update(payment, callback) {
+        this._db.query(`UPDATE payments SET status = ? WHERE id = ?`, [payment.status, payment.id], callback);
+    }
 }
 
 module.exports = Payment;

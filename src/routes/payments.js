@@ -40,4 +40,22 @@ payments.post('/payments/payment', [
     });
 });
 
+payments.put('/payments/payment/:id', (req, res) => {
+    const id = req.params.id;
+    const payment = {
+        id: id,
+        status: 'confirmed'
+    };
+
+    Payment.update(payment, (err, result) => {
+        if(err) {
+            return res.status(500).json({error: err});
+        }
+
+        console.log('Payment Created');
+
+        res.json(payment);
+    });
+});
+
 module.exports = payments;
