@@ -16,6 +16,10 @@ class Payment {
     update(payment, callback) {
         this._db.query(`UPDATE payments SET status = ? WHERE id = ?`, [payment.status, payment.id], callback);
     }
+
+    delete(id, callback) {
+        this._db.query("DELETE FROM payments WHERE id = ?", [id], callback);
+    }
 }
 
 module.exports = Payment;

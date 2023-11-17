@@ -58,4 +58,16 @@ payments.put('/payments/payment/:id', (req, res) => {
     });
 });
 
+payments.delete("/payments/payment/:id", (req, res) => {
+    const id = req.params.id;
+
+    Payment.delete(id, (err, result) => {
+        if(err) return res.status(500).json({error: err});
+
+        console.log("Payment Removed!");
+
+        return res.status(204).json({status: "success", message: "Payment Removed"});
+    });
+});
+
 module.exports = payments;
