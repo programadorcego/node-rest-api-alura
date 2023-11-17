@@ -36,7 +36,15 @@ payments.post('/payments/payment', [
         }
 
         console.log('Payment Created');
-        res.status(201).location(`/api/payments/payment/${result.insertId}`).json(payment);
+
+        response = {
+            id: result.insertId,
+            paymentData: payment,
+            href: `/api/payments/payment/${result.insertId}`,
+            methods: ["PUT", "DELETE"]
+        };
+
+        res.status(201).location(`/api/payments/payment/${result.insertId}`).json(response);
     });
 });
 
@@ -61,10 +69,15 @@ payments.put('/payments/payment/:id', (req, res) => {
 payments.delete("/payments/payment/:id", (req, res) => {
     const id = req.params.id;
 
-    Payment.delete(id, (err, result) => {
+    const payment = {
+        id: id,
+        status: "canceled"
+    };
+
+    Payment.update(payment, (err, result) => {
         if(err) return res.status(500).json({error: err});
 
-        console.log("Payment Removed!");
+        console.log("Payment Canceled!");
 
         return res.status(204).json({status: "success", message: "Payment Removed"});
     });
